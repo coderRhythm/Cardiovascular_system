@@ -15,7 +15,6 @@ with open('sc.pkl', 'rb') as f:
 @app.route('/')
 def home():
     return render_template('index.html')
-
 @app.route('/predict', methods=['POST'])
 def predict():
     if request.method == 'POST':
@@ -41,8 +40,23 @@ def predict():
         # Make prediction
         prediction = model.predict(inputs_scaled)[0]
 
-        # Render the result template with the prediction
-        return render_template('result.html', prediction=prediction)
+        # Pass all the variables to the result template
+        return render_template('result.html', 
+                               prediction=prediction, 
+                               age=age, 
+                               sex=sex, 
+                               cp=cp, 
+                               trestbps=trestbps, 
+                               chol=chol, 
+                               fbs=fbs, 
+                               restecg=restecg, 
+                               thalach=thalach, 
+                               exang=exang, 
+                               oldpeak=oldpeak, 
+                               slope=slope, 
+                               ca=ca, 
+                               thal=thal)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

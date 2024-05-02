@@ -4,11 +4,204 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prediction Result</title>
-    <!-- Add any CSS stylesheets or scripts here -->
+    <style>
+        /* Your CSS styles here */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000; /* Change background color to black */
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-image: radial-gradient(circle at 20% 50%, #434343, #000000);
+            color: #ffffff;
+        }
+
+        .container {
+            width: 100%; /* Make the container full width */
+            max-width: 1300px;
+            display: grid;
+            grid-template-columns: 1fr; /* Update to one column */
+            gap: 20px;
+            padding: 20px;
+            border-radius: 20px;
+            /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4); */
+            backdrop-filter: blur(8px);
+            
+        }
+
+        .box {
+            background-color: rgba(255, 255, 255, 0.05); /* Change background color of boxes */
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Adjust shadow */
+            backdrop-filter: blur(8px);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .box:hover {
+            transform: translateY(-5px);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #ffffff; /* Change text color to white */
+            margin-top: 0;
+        }
+
+        p {
+            text-align: center;
+            font-size: 18px;
+            color: #ffffff; /* Change text color to white */
+        }
+
+        table {
+            width: 100%;
+            max-width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.05); /* Change background color of table */
+            border-radius: 16px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Adjust shadow */
+            backdrop-filter: blur(8px);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ffffff; /* Change border color to white */
+            color: #ffffff; /* Change text color to white */
+        }
+
+        th {
+            background-color: rgba(85, 85, 85, 0.5); /* Change background color of table header */
+        }
+
+        td:last-child {
+            text-align: center;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+    </style>
 </head>
 <body>
-    <h1>Prediction Result</h1>
-    <p>The prediction result is: {{ prediction }}</p>
-    <!-- You can customize this template as needed -->
+    <div class="container">
+        <div class="box">
+            <h1>Prediction Result</h1>
+            <p>The prediction result is: {{ prediction }}</p>
+        </div>
+        <div class="box">
+            <div class="interpretation">
+                <h2>Interpretation:</h2>
+                {% if prediction == 0 %}
+                <p>
+                    The prediction result indicates the absence of heart disease. While this is a positive outcome, it's essential to continue monitoring cardiovascular health and maintain a healthy lifestyle to prevent future risks.
+                </p>
+                {% elif prediction == 1 %}
+                <p>
+                    The prediction result indicates the presence of heart disease. It's crucial to seek immediate medical attention and consult with a cardiologist or healthcare provider for further evaluation and treatment planning.
+                </p>
+                {% elif prediction == 2 %}
+                <p>
+                    The prediction result indicates a more severe stage or condition of heart disease. Urgent medical intervention is required, and it's essential to follow any emergency protocols recommended by healthcare professionals.
+                </p>
+                {% endif %}
+            </div>
+
+            <div class="recommendations">
+                <h2>Recommendations:</h2>
+                <p>
+                    Based on the prediction result, the following recommendations may be considered:
+                    {% if prediction == 0 %}
+                        <ul>
+                            <li>Continue to maintain a healthy lifestyle with regular exercise and balanced diet.</li>
+                            <li>Monitor cardiovascular health through periodic check-ups.</li>
+                            <li>Consider consulting a healthcare provider for personalized advice.</li>
+                        </ul>
+                    {% elif prediction == 1 %}
+                        <ul>
+                            <li>Consultation with a cardiologist or healthcare provider for further evaluation and diagnostic tests.</li>
+                            <li>Adopting a heart-healthy lifestyle, including regular exercise, balanced diet, and stress management.</li>
+                            <li>Maintaining a healthy weight and managing other risk factors such as high blood pressure, cholesterol levels, and diabetes.</li>
+                            <li>Compliance with prescribed medications and treatment plans, if diagnosed with heart disease.</li>
+                            <li>Regular monitoring of cardiovascular health through routine check-ups and screenings.</li>
+                        </ul>
+                    {% elif prediction == 2 %}
+                        <ul>
+                            <li>Seek immediate medical attention and consult with a cardiologist or healthcare provider for further evaluation.</li>
+                            <li>Follow any emergency protocols recommended by healthcare professionals.</li>
+                        </ul>
+                    {% endif %}
+                    It is essential to prioritize heart health and take proactive measures to reduce the risk of cardiovascular diseases.
+                </p>
+            </div>
+        </div>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Attribute</th>
+                    <th>Value</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Age</td>
+                    <td>{{ age }}</td>
+                </tr>
+                <tr>
+                    <td>Sex</td>
+                    <td>{{ sex }}</td>
+                </tr>
+                <tr>
+                    <td>Chest Pain Type</td>
+                    <td>{{ cp }}</td>
+                </tr>
+                <tr>
+                    <td>Resting Blood Pressure</td>
+                    <td>{{ trestbps }}</td>
+                </tr>
+                <tr>
+                    <td>Cholesterol</td>
+                    <td>{{ chol }}</td>
+                </tr>
+                <tr>
+                    <td>Fasting Blood Sugar</td>
+                    <td>{{ fbs }}</td>
+                </tr>
+                <tr>
+                    <td>Resting Electrocardiographic Results</td>
+                    <td>{{ restecg }}</td>
+                </tr>
+                <tr>
+                    <td>Maximum Heart Rate Achieved</td>
+                    <td>{{ thalach }}</td>
+                </tr>
+                <tr>
+                    <td>Exercise Induced Angina</td>
+                    <td>{{ exang }}</td>
+                </tr>
+                <tr>
+                    <td>ST Depression Induced by Exercise Relative to Rest</td>
+                    <td>{{ oldpeak }}</td>
+                </tr>
+                <tr>
+                    <td>Slope of the Peak Exercise ST Segment</td>
+                    <td>{{ slope }}</td>
+                </tr>
+                <tr>
+                    <td>Number of Major Vessels (0-3) Colored by Fluoroscopy</td>
+                    <td>{{ ca }}</td>
+                </tr>
+                <tr>
+                    <td>Thalassemia</td>
+                    <td>{{ thal }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

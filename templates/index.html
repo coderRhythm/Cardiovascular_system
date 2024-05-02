@@ -6,144 +6,206 @@
     <title>Heart Disease Prediction</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: black;
             margin: 0;
             padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .container {
-            max-width: 600px;
+            width: 90%;
             margin: 20px auto;
-            background-color: #ffffff;
             padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+            background-color: #222222;
+            color: #ffffff;
         }
 
         h1 {
             text-align: center;
-            color: #333333;
+            color: #cfdae4;
             margin-top: 0;
+            margin-bottom: 20px;
         }
 
         form {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            margin-top: 20px;
         }
 
-        label {
-            width: 45%;
-            margin-bottom: 10px;
-            font-weight: bold;
+        .input-group {
+            width: calc(50% - 10px);
+            margin-bottom: 20px;
         }
 
-        input[type="number"],
-        select {
-            width: calc(55% - 10px);
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #ffffff;
+        }
+
+        .input-group input,
+        .input-group select {
+            width: 100%;
             padding: 10px;
-            border: 1px solid #cccccc;
+            border: 1px solid #f6fbff;
             border-radius: 5px;
             box-sizing: border-box;
-            margin-bottom: 10px; /* Add spacing between input fields */
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        .input-group input:focus,
+        .input-group select:focus {
+            border-color: #a8aea9;
+            outline: none;
         }
 
         input[type="submit"] {
             width: 100%;
-            background-color: #4CAF50;
-            color: white;
-            padding: 15px 20px;
-            border: none;
+            padding: 15px;
+            border: 1px solid #f6fbff;
             border-radius: 5px;
+            box-sizing: border-box;
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 20px;
+            transition: border-color 0.3s ease;
             cursor: pointer;
-            font-size: 16px;
-            margin-top: 20px;
         }
 
         input[type="submit"]:hover {
-            background-color: #45a049;
+            background-color: #388e3c;
         }
 
         select {
-            width: calc(55% - 10px);
+            width: 100%;
             padding: 10px;
-            border: 1px solid #cccccc;
+            border: 1px solid #1976d2;
             border-radius: 5px;
             box-sizing: border-box;
-            background-color: white;
-            margin-bottom: 10px; /* Add spacing between input fields */
+            background-color: #333333;
+            color: #ffffff;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #ffffff;
+            outline: none;
+        }
+
+        @media (max-width: 600px) {
+            .input-group {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Heart Disease Prediction</h1>
+        <h1>Cardiovascular Health Assessment</h1>
         <form action="/predict" method="post">
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age" min="0" max="100" value="50">
+            <div class="input-group">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age" min="0" max="100" value="50" required>
+            </div>
             
-            <label for="sex">Sex:</label>
-            <select id="sex" name="sex">
-                <option value="0">Female</option>
-                <option value="1" selected>Male</option>
-            </select>
+            <div class="input-group">
+                <label for="sex">Sex:</label>
+                <select id="sex" name="sex" required>
+                    <option value="1">Male</option>
+                    <option value="0">Female</option>
+                </select>
+            </div>
             
-            <label for="cp">Chest Pain Type:</label>
-            <select id="cp" name="cp">
-                <option value="0">Typical Angina</option>
-                <option value="1">Atypical Angina</option>
-                <option value="2">Non-anginal Pain</option>
-                <option value="3" selected>Asymptomatic</option>
-            </select>
+            <div class="input-group">
+                <label for="cp">Chest Pain Type:</label>
+                <select id="cp" name="cp" required>
+                    <option value="0">Typical Angina</option>
+                    <option value="1">Atypical Angina</option>
+                    <option value="2">Non-anginal Pain</option>
+                    <option value="3">Asymptomatic</option>
+                </select>
+            </div>
             
-            <label for="trestbps">Resting Blood Pressure:</label>
-            <input type="number" id="trestbps" name="trestbps" min="0" max="300" value="110">
+            <div class="input-group">
+                <label for="trestbps">Resting Blood Pressure:</label>
+                <input type="number" id="trestbps" name="trestbps" placeholder="Enter value" required>
+            </div>
             
-            <label for="chol">Cholesterol:</label>
-            <input type="number" id="chol" name="chol" min="0" max="600" value="230">
+            <div class="input-group">
+                <label for="chol">Cholesterol:</label>
+                <input type="number" id="chol" name="chol" placeholder="Enter value" required>
+            </div>
             
-            <label for="fbs">Fasting Blood Sugar:</label>
-            <select id="fbs" name="fbs">
-                <option value="0" selected>Less Than 120 mg/dl</option>
-                <option value="1">Greater Than 120 mg/dl</option>
-            </select>
+            <div class="input-group">
+                <label for="fbs">Fasting Blood Sugar:</label>
+                <select id="fbs" name="fbs" required>
+                    <option value="0">Less Than 120 mg/dl</option>
+                    <option value="1">Greater Than 120 mg/dl</option>
+                </select>
+            </div>
             
-            <label for="restecg">Resting Electrocardiographic Results:</label>
-            <select id="restecg" name="restecg">
-                <option value="0">Normal</option>
-                <option value="1" selected>ST-T Wave Abnormality</option>
-                <option value="2">Left Ventricular Hypertrophy</option>
-            </select>
+            <div class="input-group">
+                <label for="restecg">Resting Electrocardiographic Results:</label>
+                <select id="restecg" name="restecg" required>
+                    <option value="0">Normal</option>
+                    <option value="1">ST-T Wave Abnormality</option>
+                    <option value="2">Left Ventricular Hypertrophy</option>
+                </select>
+            </div>
             
-            <label for="thalach">Maximum Heart Rate Achieved:</label>
-            <input type="number" id="thalach" name="thalach" min="60" max="220" value="140">
+            <div class="input-group">
+                <label for="thalach">Maximum Heart Rate Achieved:</label>
+                <input type="number" id="thalach" name="thalach" placeholder="Enter value" required>
+            </div>
             
-            <label for="exang">Exercise Induced Angina:</label>
-            <select id="exang" name="exang">
-                <option value="0" selected>No</option>
-                <option value="1">Yes</option>
-            </select>
+            <div class="input-group">
+                <label for="exang">Exercise Induced Angina:</label>
+                <select id="exang" name="exang" required>
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+            </div>
             
-            <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest:</label>
-            <input type="number" id="oldpeak" name="oldpeak" min="0" max="10" step="0.1" value="2.2">
+            <div class="input-group">
+                <label for="oldpeak">ST Depression Induced by Exercise Relative to Rest:</label>
+                <input type="number" id="oldpeak" name="oldpeak" placeholder="Enter value" required>
+            </div>
             
-            <label for="slope">Slope of the Peak Exercise ST Segment:</label>
-            <select id="slope" name="slope">
-                <option value="0">Upsloping</option>
-                <option value="1" selected>Flat</option>
-                <option value="2">Downsloping</option>
-            </select>
+            <div class="input-group">
+                <label for="slope">Slope of the Peak Exercise ST Segment:</label>
+                <select id="slope" name="slope" required>
+                    <option value="0">Upsloping</option>
+                    <option value="1">Flat</option>
+                    <option value="2">Downsloping</option>
+                </select>
+            </div>
             
-            <label for="ca">Number of Major Vessels (0-3) Colored by Fluoroscopy:</label>
-            <input type="number" id="ca" name="ca" min="0" max="3" value="0">
+            <div class="input-group">
+                <label for="ca">Number of Major Vessels (0-3) Colored by Fluoroscopy:</label>
+                <input type="number" id="ca" name="ca" min="0" max="3" placeholder="Enter value" required>
+            </div>
             
-            <label for="thal">Thalassemia:</label>
-            <select id="thal" name="thal">
-                <option value="0">Normal</option>
-                <option value="1">Fixed Defect</option>
-                <option value="2" selected>Reversible Defect</option>
-            </select>
+            <div class="input-group">
+                <label for="thal">Thalassemia:</label>
+                <select id="thal" name="thal" required>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                </select>
+            </div>
             
             <input type="submit" value="Predict">
         </form>
